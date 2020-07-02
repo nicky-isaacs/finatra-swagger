@@ -9,7 +9,7 @@ crossScalaVersions := Seq("2.11.12", "2.12.11")
 Global / onChangedBuildSource := ReloadOnSourceChanges
 
 lazy val twitterReleaseVersion = "20.6.0"
-lazy val jacksonVersion = "2.10.4"
+lazy val jacksonVersion = "2.11.1"
 
 lazy val swaggerUIVersion = SettingKey[String]("swaggerUIVersion")
 
@@ -20,13 +20,8 @@ buildInfoPackage := "com.jakehschwartz.finatra.swagger"
 buildInfoKeys := Seq[BuildInfoKey](name, version, swaggerUIVersion)
 
 libraryDependencies ++= Seq(
-  "com.twitter" %% "finatra-http" % twitterReleaseVersion excludeAll(
-    "com.fasterxml.jackson.core",
-    "com.fasterxml.jackson.dataformat",
-    "com.fasterxml.jackson.datatype",
-    "com.fasterxml.jackson.module"
-  ),
-  "io.swagger" % "swagger-core" % "1.6.1",
+  "com.twitter" %% "finatra-http" % twitterReleaseVersion,
+  "io.swagger" % "swagger-core" % "1.6.2",
   "io.swagger" %% "swagger-scala-module" % "1.0.6",
   "com.fasterxml.jackson.core" % "jackson-core" % jacksonVersion,
   "com.fasterxml.jackson.core" % "jackson-annotations" % jacksonVersion,
@@ -41,36 +36,11 @@ libraryDependencies ++= Seq(
 )
 
 val examplesTestLibs = Seq(
-  "com.twitter" %% "finatra-http" % twitterReleaseVersion % "test" classifier "tests" excludeAll(
-    "com.fasterxml.jackson.core",
-    "com.fasterxml.jackson.dataformat",
-    "com.fasterxml.jackson.datatype",
-    "com.fasterxml.jackson.module"
-  ),
-  "com.twitter" %% "inject-app" % twitterReleaseVersion % "test" classifier "tests" excludeAll(
-    "com.fasterxml.jackson.core",
-    "com.fasterxml.jackson.dataformat",
-    "com.fasterxml.jackson.datatype",
-    "com.fasterxml.jackson.module"
-  ),
-  "com.twitter" %% "inject-core" % twitterReleaseVersion % "test" classifier "tests" excludeAll(
-    "com.fasterxml.jackson.core",
-    "com.fasterxml.jackson.dataformat",
-    "com.fasterxml.jackson.datatype",
-    "com.fasterxml.jackson.module"
-  ),
-  "com.twitter" %% "inject-modules" % twitterReleaseVersion % "test" classifier "tests" excludeAll(
-    "com.fasterxml.jackson.core",
-    "com.fasterxml.jackson.dataformat",
-    "com.fasterxml.jackson.datatype",
-    "com.fasterxml.jackson.module"
-  ),
-  "com.twitter" %% "inject-server" % twitterReleaseVersion % "test" classifier "tests" excludeAll(
-    "com.fasterxml.jackson.core",
-    "com.fasterxml.jackson.dataformat",
-    "com.fasterxml.jackson.datatype",
-    "com.fasterxml.jackson.module"
-  ),
+  "com.twitter" %% "finatra-http" % twitterReleaseVersion % "test" classifier "tests",
+  "com.twitter" %% "inject-app" % twitterReleaseVersion % "test" classifier "tests",
+  "com.twitter" %% "inject-core" % twitterReleaseVersion % "test" classifier "tests",
+  "com.twitter" %% "inject-modules" % twitterReleaseVersion % "test" classifier "tests",
+  "com.twitter" %% "inject-server" % twitterReleaseVersion % "test" classifier "tests",
   "ch.qos.logback" % "logback-classic" % "1.2.3",
   "org.scalatest" %% "scalatest" % "3.0.8"  % Test,
   "org.mockito" % "mockito-all" % "1.10.19"  % Test
