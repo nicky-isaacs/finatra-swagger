@@ -8,7 +8,7 @@ crossScalaVersions := Seq("2.11.12", "2.12.11")
 
 Global / onChangedBuildSource := ReloadOnSourceChanges
 
-lazy val twitterReleaseVersion = "20.6.0"
+lazy val twitterReleaseVersion = "20.7.0"
 lazy val jacksonVersion = "2.11.1"
 
 lazy val swaggerUIVersion = SettingKey[String]("swaggerUIVersion")
@@ -27,7 +27,7 @@ libraryDependencies ++= Seq(
   "com.fasterxml.jackson.module" %% "jackson-module-scala" % jacksonVersion,
   "org.webjars" % "swagger-ui" % swaggerUIVersion.value,
   "net.bytebuddy" % "byte-buddy" % "1.10.13",
-  "org.scalatest" %% "scalatest" % "3.0.8" % Test
+  "org.scalatest" %% "scalatest" % "3.1.2" % Test
 )
 
 val examplesTestLibs = Seq(
@@ -36,6 +36,7 @@ val examplesTestLibs = Seq(
   "com.twitter" %% "inject-core" % twitterReleaseVersion % "test" classifier "tests",
   "com.twitter" %% "inject-modules" % twitterReleaseVersion % "test" classifier "tests",
   "com.twitter" %% "inject-server" % twitterReleaseVersion % "test" classifier "tests",
+  "org.scalatestplus" %% "mockito-1-10" % "3.1.0.0" % "test",
   "ch.qos.logback" % "logback-classic" % "1.2.3",
   "org.scalatest" %% "scalatest" % "3.0.8"  % Test,
   "org.mockito" % "mockito-all" % "1.10.19"  % Test
