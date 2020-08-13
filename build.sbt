@@ -2,14 +2,14 @@ name := "finatra-swagger"
 
 organization := "com.jakehschwartz"
 
-scalaVersion := "2.12.11"
+scalaVersion := "2.12.12"
 
 crossScalaVersions := Seq("2.11.12", "2.12.11")
 
 Global / onChangedBuildSource := ReloadOnSourceChanges
 
-lazy val twitterReleaseVersion = "20.7.0"
-lazy val jacksonVersion = "2.11.1"
+lazy val twitterReleaseVersion = "20.8.0"
+lazy val jacksonVersion = "2.11.2"
 
 lazy val swaggerUIVersion = SettingKey[String]("swaggerUIVersion")
 
@@ -26,8 +26,8 @@ libraryDependencies ++= Seq(
   "com.fasterxml.jackson.datatype" % "jackson-datatype-joda" % jacksonVersion,
   "com.fasterxml.jackson.module" %% "jackson-module-scala" % jacksonVersion,
   "org.webjars" % "swagger-ui" % swaggerUIVersion.value,
-  "net.bytebuddy" % "byte-buddy" % "1.10.13",
-  "org.scalatest" %% "scalatest" % "3.1.2" % Test
+  "net.bytebuddy" % "byte-buddy" % "1.10.14",
+  "org.scalatest" %% "scalatest" % "3.1.3" % Test
 )
 
 val examplesTestLibs = Seq(
