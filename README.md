@@ -76,6 +76,5 @@ To see the Swagger UI, use the `/docs` endpoint. This can be overridden using th
 To see the model that is JSON document that is generated, use `/swagger.json`. 
 
 ## Features
-TODO
 
 To see these in action, check out the [examples](/examples) directory
