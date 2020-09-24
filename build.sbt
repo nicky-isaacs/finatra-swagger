@@ -38,7 +38,7 @@ val examplesTestLibs = Seq(
   "com.twitter" %% "inject-server" % twitterReleaseVersion % "test" classifier "tests",
   "org.scalatestplus" %% "mockito-1-10" % "3.1.0.0" % "test",
   "ch.qos.logback" % "logback-classic" % "1.2.3",
-  "org.scalatest" %% "scalatest" % "3.0.8"  % Test,
+  "org.scalatest" %% "scalatest" % "3.1.2"  % Test,
   "org.mockito" % "mockito-all" % "1.10.19"  % Test
 )
 
