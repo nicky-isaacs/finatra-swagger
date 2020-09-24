@@ -26,7 +26,7 @@ libraryDependencies ++= Seq(
   "com.fasterxml.jackson.datatype" % "jackson-datatype-joda" % jacksonVersion,
   "com.fasterxml.jackson.module" %% "jackson-module-scala" % jacksonVersion,
   "org.webjars" % "swagger-ui" % swaggerUIVersion.value,
-  "net.bytebuddy" % "byte-buddy" % "1.10.14",
+  "net.bytebuddy" % "byte-buddy" % "1.10.16",
   "org.scalatest" %% "scalatest" % "3.1.3" % Test
 )
 
