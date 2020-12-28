@@ -50,7 +50,7 @@ object FinatraSwagger {
       classOf[constraints.Range],
       classOf[constraints.Size],
       classOf[constraints.TimeGranularity],
-      classOf[constraints.UUID],
+      classOf[constraints.UUID]
     )
 
   implicit def convert(swagger: Swagger): FinatraSwagger = new FinatraSwagger(swagger)
