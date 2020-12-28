@@ -4,16 +4,15 @@ import java.lang.annotation.Annotation
 import java.lang.reflect.ParameterizedType
 import java.util
 import javax.inject.{Inject => JInject}
-
 import scala.collection.JavaConverters._
 import scala.reflect.runtime._
 import scala.reflect.runtime.universe._
-
 import com.fasterxml.jackson.databind.{JavaType, ObjectMapper}
 import com.google.inject.{Inject => GInject}
 import com.jakehschwartz.finatra.swagger.SchemaUtil._
 import com.twitter.finagle.http.Request
 import com.twitter.finatra.http.annotations.{FormParam, QueryParam, RouteParam, Header => HeaderParam}
+import com.twitter.finatra.validation.constraints
 import io.swagger.converter.{ModelConverter, ModelConverterContext, ModelConverters}
 import io.swagger.jackson.ModelResolver
 import io.swagger.models._
@@ -29,7 +28,28 @@ object FinatraSwagger {
   private val finatraRouteParameter = ":(\\w+)".r
 
   private val finatraAnnotations: Set[Class[_ <: Annotation]] =
-    Set(classOf[RouteParam], classOf[QueryParam], classOf[JInject], classOf[GInject], classOf[HeaderParam], classOf[FormParam])
+    Set(
+      classOf[RouteParam],
+      classOf[QueryParam],
+      classOf[JInject],
+      classOf[GInject],
+      classOf[HeaderParam],
+      classOf[FormParam],
+      classOf[constraints.AssertFalse],
+      classOf[constraints.AssertTrue],
+      classOf[constraints.CountryCode],
+      classOf[constraints.FutureTime],
+      classOf[constraints.Min],
+      classOf[constraints.Max],
+      classOf[constraints.NotEmpty],
+      classOf[constraints.OneOf],
+      classOf[constraints.PastTime],
+      classOf[constraints.Pattern],
+      classOf[constraints.Range],
+      classOf[constraints.Size],
+      classOf[constraints.TimeGranularity],
+      classOf[constraints.UUID],
+    )
 
   implicit def convert(swagger: Swagger): FinatraSwagger = new FinatraSwagger(swagger)
 }

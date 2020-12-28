@@ -2,7 +2,9 @@ package com.jakehschwartz.finatra.swagger
 
 import com.twitter.finagle.http.Request
 import com.twitter.finatra.http.annotations.RouteParam
+import com.twitter.finatra.validation.constraints.{Max, Min}
 import io.swagger.annotations.{ApiModel, ApiModelProperty}
+
 import javax.inject.Inject
 import org.joda.time.{DateTime, LocalDate}
 
@@ -18,7 +20,7 @@ case class StudentWithRoute(
   @ApiModelProperty(name = "last_name")lastName: String,
   gender: Gender,
   birthday: LocalDate,
-  grade: Int,
+  @Min(1) @Max(12) grade: Int,
   emails: Array[String],
   address: Option[Address]
 )
