@@ -5,7 +5,7 @@
 
 Add [Swagger UI](http://swagger.io/swagger-ui/) support to [Finatra](https://github.com/twitter/finatra) web framework.
 
-Currently supports Scala 2.12 and major Finatra versions going back to 2.10.0 
+Currently supports Scala 2.13 and major Finatra versions going back to 2.10.0 
 
 For older versions, see the original repository by [xiaodongw](https://github.com/xiaodongw/swagger-finatra)
 
@@ -13,7 +13,7 @@ For older versions, see the original repository by [xiaodongw](https://github.co
 
 The major and minor version of the library matches the Finatra major and minor version:
 ````sbt
-libraryDependencies += "com.jakehschwartz" %% "finatra-swagger" % "20.9.0"
+libraryDependencies += "com.jakehschwartz" %% "finatra-swagger" % "21.1.0"
 ````
 
 First, create a subclass of a SwaggerModule

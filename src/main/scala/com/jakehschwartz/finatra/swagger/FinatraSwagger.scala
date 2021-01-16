@@ -1,14 +1,5 @@
 package com.jakehschwartz.finatra.swagger
 
-import java.lang.annotation.Annotation
-import java.lang.reflect.ParameterizedType
-import java.util
-import javax.inject.{Inject => JInject}
-
-import scala.collection.JavaConverters._
-import scala.reflect.runtime._
-import scala.reflect.runtime.universe._
-
 import com.fasterxml.jackson.databind.{JavaType, ObjectMapper}
 import com.google.inject.{Inject => GInject}
 import com.jakehschwartz.finatra.swagger.SchemaUtil._
@@ -25,6 +16,13 @@ import net.bytebuddy.ByteBuddy
 import net.bytebuddy.description.`type`.TypeDescription
 import net.bytebuddy.description.modifier.Visibility
 
+import java.lang.annotation.Annotation
+import java.lang.reflect.ParameterizedType
+import java.util
+import javax.inject.{Inject => JInject}
+import scala.jdk.CollectionConverters._
+import scala.reflect.runtime._
+import scala.reflect.runtime.universe._
 
 object FinatraSwagger {
   private val finatraRouteParameter = ":(\\w+)".r

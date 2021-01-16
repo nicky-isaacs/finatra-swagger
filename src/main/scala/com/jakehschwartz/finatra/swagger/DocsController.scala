@@ -123,6 +123,6 @@ class DocsController @Inject()(swagger: Swagger,
   }
 
   private def dottedFileExtension(uri: String) = {
-    '.' + FilenameUtils.getExtension(uri)
+    s".${FilenameUtils.getExtension(uri)}"
   }
 }

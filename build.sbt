@@ -2,13 +2,13 @@ name := "finatra-swagger"
 
 organization := "com.jakehschwartz"
 
-scalaVersion := "2.12.12"
+scalaVersion := "2.13.1"
 
-crossScalaVersions := Seq("2.11.12", "2.12.11")
+crossScalaVersions := Seq("2.11.12", "2.12.12", "2.13.1")
 
 Global / onChangedBuildSource := ReloadOnSourceChanges
 
-lazy val twitterReleaseVersion = "20.12.0"
+lazy val twitterReleaseVersion = "21.1.0"
 lazy val jacksonVersion = "2.11.2"
 
 lazy val swaggerUIVersion = SettingKey[String]("swaggerUIVersion")
@@ -26,7 +26,7 @@ libraryDependencies ++= Seq(
   "com.fasterxml.jackson.datatype" % "jackson-datatype-joda" % jacksonVersion,
   "com.fasterxml.jackson.module" %% "jackson-module-scala" % jacksonVersion,
   "org.webjars" % "swagger-ui" % swaggerUIVersion.value,
-  "net.bytebuddy" % "byte-buddy" % "1.10.16",
+  "net.bytebuddy" % "byte-buddy" % "1.10.19",
   "org.scalatest" %% "scalatest" % "3.1.3" % Test
 )
 
@@ -38,7 +38,7 @@ val examplesTestLibs = Seq(
   "com.twitter" %% "inject-server" % twitterReleaseVersion % "test" classifier "tests",
   "org.scalatestplus" %% "mockito-1-10" % "3.1.0.0" % "test",
   "ch.qos.logback" % "logback-classic" % "1.2.3",
-  "org.scalatest" %% "scalatest" % "3.1.2"  % Test,
+  "org.scalatest" %% "scalatest" % "3.1.4"  % Test,
   "org.mockito" % "mockito-all" % "1.10.19"  % Test
 )
 
