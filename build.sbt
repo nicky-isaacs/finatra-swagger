@@ -1,6 +1,14 @@
-name := "finatra-swagger"
+inThisBuild(List(
+  organization := "com.jakehschwartz",
+  homepage := Some(url("https://github.com/jakehschwartz/finatra-swagger")),
+  licenses := List("Apache-2.0" -> url("http://www.apache.org/licenses/LICENSE-2.0")),
+  developers := List(
+    Developer(id="jakehschwartz", name="Jake Schwartz", email="jakehschwartz@gmail.com", url=url("https://www.jakehschwartz.com")),
+    Developer(id="xiaodongw", name="Xiaodong Wang", email="xiaodongw79@gmail.com", url=url("https://github.com/xiaodongw"))
+  )
+))
 
-organization := "com.jakehschwartz"
+name := "finatra-swagger"
 
 scalaVersion := "2.13.1"
 
@@ -49,40 +57,16 @@ scalacOptions ++= Seq(
   "-language:implicitConversions"
 )
 
-pomIncludeRepository := { _ => false }
-
-publishMavenStyle := true
-
-publishTo := {
-  val nexus = "https://oss.sonatype.org/"
-  if (isSnapshot.value)
-    Some("snapshots" at nexus + "content/repositories/snapshots")
-  else
-    Some("releases"  at nexus + "service/local/staging/deploy/maven2")
-}
-
-credentials += Credentials(
-  "Sonatype Nexus Repository Manager",
-  "oss.sonatype.org",
-  sys.env.getOrElse("SONATYPE_USERNAME", ""),
-  sys.env.getOrElse("SONATYPE_PASSWORD", "")
-)
-
-pgpPassphrase := sys.env.get("PGP_PASSPHRASE").map(_.toCharArray())
-
-// License of your choice
-licenses := Seq("Apache 2" -> url("http://www.apache.org/licenses/LICENSE-2.0.txt"))
-homepage := Some(url("https://(your project url)"))
-scmInfo := Some(
-  ScmInfo(
-    browseUrl = url("https://github.com/jakehschwartz/finatra-swagger"),
-    connection = "https://github.com/jakehschwartz/finatra-swagger.git"
-  )
-)
-developers := List(
-  Developer(id="jakehschwartz", name="Jake Schwartz", email="jakehschwartz@gmail.com", url=url("https://www.jakehschwartz.com")),
-  Developer(id="xiaodongw", name="Xiaodong Wang", email="xiaodongw79@gmail.com", url=url("https://github.com/xiaodongw"))
-)
+//pomIncludeRepository := { _ => false }
+//
+//pgpPassphrase := sys.env.get("PGP_PASSPHRASE").map(_.toCharArray())
+//
+//scmInfo := Some(
+//  ScmInfo(
+//    browseUrl = url("https://github.com/jakehschwartz/finatra-swagger"),
+//    connection = "https://github.com/jakehschwartz/finatra-swagger.git"
+//  )
+//)
 
 lazy val root = Project("finatra-swagger", file("."))
 
