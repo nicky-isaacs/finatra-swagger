@@ -38,7 +38,7 @@ libraryDependencies ++= Seq(
   "org.scalatest" %% "scalatest" % "3.1.3" % Test
 )
 
-val examplesTestLibs = Seq(
+val testLibs = Seq(
   "com.twitter" %% "finatra-http" % twitterReleaseVersion % "test" classifier "tests",
   "com.twitter" %% "inject-app" % twitterReleaseVersion % "test" classifier "tests",
   "com.twitter" %% "inject-core" % twitterReleaseVersion % "test" classifier "tests",
@@ -50,11 +50,30 @@ val examplesTestLibs = Seq(
   "org.mockito" % "mockito-all" % "1.10.19"  % Test
 )
 
+val exampleLibs = Seq(
+  "com.jakehschwartz" %% "finatra-swagger" % twitterReleaseVersion,
+
+)
+
 scalacOptions ++= Seq(
   "-deprecation",
   "-feature",
   "-language:existentials",
   "-language:implicitConversions"
+)
+
+val sharedSettings =   Seq(
+  parallelExecution in Test := true,
+  testOptions += Tests.Argument(TestFrameworks.ScalaTest, "-oDF"),
+  javaOptions ++= Seq(
+    "-Xss8M",
+    "-Xms512M",
+    "-Xmx2G"
+  ),
+  javaOptions in Test ++= Seq(
+    "-Dlog.service.output=/dev/stdout",
+    "-Dlog.access.output=/dev/stdout",
+    "-Dlog_level=DEBUG")
 )
 
 //pomIncludeRepository := { _ => false }
@@ -69,20 +88,10 @@ scalacOptions ++= Seq(
 //)
 
 lazy val root = Project("finatra-swagger", file("."))
+  .settings(libraryDependencies ++= testLibs)
+  .settings(sharedSettings)
 
 lazy val example = Project("hello-world-example", file("examples/hello-world"))
-  .dependsOn(root)
-  .settings(libraryDependencies ++= examplesTestLibs)
-  .settings(
-    parallelExecution in Test := true,
-    testOptions += Tests.Argument(TestFrameworks.ScalaTest, "-oDF"),
-    javaOptions ++= Seq(
-      "-Xss8M",
-      "-Xms512M",
-      "-Xmx2G"
-    ),
-    javaOptions in Test ++= Seq(
-      "-Dlog.service.output=/dev/stdout",
-      "-Dlog.access.output=/dev/stdout",
-      "-Dlog_level=DEBUG")
-  )
+  .settings(libraryDependencies ++= testLibs ++ exampleLibs)
+  .settings(sharedSettings)
+
