@@ -28,26 +28,33 @@ buildInfoPackage := "com.jakehschwartz.finatra.swagger"
 buildInfoKeys := Seq[BuildInfoKey](name, version, swaggerUIVersion)
 
 libraryDependencies ++= Seq(
+  "com.fasterxml.jackson.datatype" % "jackson-datatype-joda" % jacksonVersion,
+  "com.fasterxml.jackson.module" %% "jackson-module-scala" % jacksonVersion,
   "com.twitter" %% "finatra-http" % twitterReleaseVersion,
   "io.swagger" % "swagger-core" % "1.6.2",
   "io.swagger" %% "swagger-scala-module" % "1.0.6",
-  "com.fasterxml.jackson.datatype" % "jackson-datatype-joda" % jacksonVersion,
-  "com.fasterxml.jackson.module" %% "jackson-module-scala" % jacksonVersion,
-  "org.webjars" % "swagger-ui" % swaggerUIVersion.value,
   "net.bytebuddy" % "byte-buddy" % "1.10.19",
-  "org.scalatest" %% "scalatest" % "3.1.3" % Test
+  "org.scalatest" %% "scalatest" % "3.1.3" % Test,
+  "org.webjars" % "swagger-ui" % swaggerUIVersion.value
+
 )
 
-val examplesTestLibs = Seq(
+val testLibs = Seq(
+  "ch.qos.logback" % "logback-classic" % "1.2.3",
   "com.twitter" %% "finatra-http" % twitterReleaseVersion % "test" classifier "tests",
   "com.twitter" %% "inject-app" % twitterReleaseVersion % "test" classifier "tests",
   "com.twitter" %% "inject-core" % twitterReleaseVersion % "test" classifier "tests",
   "com.twitter" %% "inject-modules" % twitterReleaseVersion % "test" classifier "tests",
   "com.twitter" %% "inject-server" % twitterReleaseVersion % "test" classifier "tests",
-  "org.scalatestplus" %% "mockito-1-10" % "3.1.0.0" % "test",
-  "ch.qos.logback" % "logback-classic" % "1.2.3",
+  "org.mockito" % "mockito-all" % "1.10.19"  % Test,
   "org.scalatest" %% "scalatest" % "3.1.4"  % Test,
-  "org.mockito" % "mockito-all" % "1.10.19"  % Test
+  "org.scalatestplus" %% "mockito-1-10" % "3.1.0.0" % "test"
+
+)
+
+val exampleLibs = Seq(
+  "com.jakehschwartz" %% "finatra-swagger" % twitterReleaseVersion,
+
 )
 
 scalacOptions ++= Seq(
@@ -55,6 +62,20 @@ scalacOptions ++= Seq(
   "-feature",
   "-language:existentials",
   "-language:implicitConversions"
+)
+
+val sharedSettings =   Seq(
+  parallelExecution in Test := true,
+  testOptions += Tests.Argument(TestFrameworks.ScalaTest, "-oDF"),
+  javaOptions ++= Seq(
+    "-Xss8M",
+    "-Xms512M",
+    "-Xmx2G"
+  ),
+  javaOptions in Test ++= Seq(
+    "-Dlog.service.output=/dev/stdout",
+    "-Dlog.access.output=/dev/stdout",
+    "-Dlog_level=DEBUG")
 )
 
 //pomIncludeRepository := { _ => false }
@@ -69,20 +90,10 @@ scalacOptions ++= Seq(
 //)
 
 lazy val root = Project("finatra-swagger", file("."))
+  .settings(libraryDependencies ++= testLibs)
+  .settings(sharedSettings)
 
 lazy val example = Project("hello-world-example", file("examples/hello-world"))
-  .dependsOn(root)
-  .settings(libraryDependencies ++= examplesTestLibs)
-  .settings(
-    parallelExecution in Test := true,
-    testOptions += Tests.Argument(TestFrameworks.ScalaTest, "-oDF"),
-    javaOptions ++= Seq(
-      "-Xss8M",
-      "-Xms512M",
-      "-Xmx2G"
-    ),
-    javaOptions in Test ++= Seq(
-      "-Dlog.service.output=/dev/stdout",
-      "-Dlog.access.output=/dev/stdout",
-      "-Dlog_level=DEBUG")
-  )
+  .settings(libraryDependencies ++= testLibs ++ exampleLibs)
+  .settings(sharedSettings)
+
